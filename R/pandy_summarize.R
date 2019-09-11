@@ -28,7 +28,7 @@ pandy_summarize <- function(.data, ..., persist_term = 8, degree_time = 5.92, pe
         n = n(),
         n_semester_persist = sum(!!!rlang::parse_exprs(n_persist_expr)),
         n_year_degree = sum(hasDegree &
-                              coe_years_to_degree <= degree_time, na.rm = TRUE)
+                              years_to_degree <= degree_time, na.rm = TRUE)
       ) %>%
       add_persist_and_yield(),
     n_persist_term = persist_term,
@@ -39,6 +39,7 @@ pandy_summarize <- function(.data, ..., persist_term = 8, degree_time = 5.92, pe
 #' filter student records and count number of terms for each student
 #'
 #' @param .data A tbl. Must have an id column
+#' @param .name name of resulting data column
 #' @param ... Logical predicates defined in terms of variable in .data
 filter_count_terms <- function(.data, .name, .predicate) {
   filter_args <- enquo(.predicate)
